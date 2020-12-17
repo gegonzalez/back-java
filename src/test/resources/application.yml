@@ -1,0 +1,6 @@
+spring:
+  profiles: test
+  data:
+    mongodb:
+      host: localhost
+      port: 27018

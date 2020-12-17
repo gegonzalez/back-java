@@ -1,0 +1,27 @@
+logging:
+  level:
+    ROOT: INFO
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health
+
+spring:
+  data:
+    mongodb:
+      host: ${DB_HOST}
+      port: ${DB_PORT}
+      database: ${DB_DATABASE}
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+      authentication-database: admin
+
+log4j:
+  category:
+    org:
+      springframework:
+        data:
+          mongodb: DEBUG
