@@ -12,7 +12,7 @@ public class PromotionUtil {
     public static final int MAX_PERCENTAGE_INT = 5;
     private static final Logger LOG = LoggerFactory.getLogger(PromotionUtil.class);
 
-    public static Discount calculateDiscount(String description, int price) {
+    public static Discount calculateDiscount(final String description, final int price) {
         LOG.info(String.format("method=calculateDiscount description=%s price=%d", description, price));
         if (null == description || description.isBlank() || price <= 0) {
             return buildNoDiscount(price);

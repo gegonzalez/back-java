@@ -12,7 +12,7 @@ class ProductTest {
     private static final String IMAGE = "image";
     private static final int PRICE = 100;
 
-    Product product = new Product(ID, BRAND, DESCRIPTION, IMAGE, PRICE);
+    private final Product product = new Product(ID, BRAND, DESCRIPTION, IMAGE, PRICE);
 
     @Test
     void shouldGetProductCorrectly() {
