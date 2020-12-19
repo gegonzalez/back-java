@@ -102,6 +102,15 @@ public class ProductControllerIntegrationTest {
     }
 
     @Test
+    void shouldReturnProductListByExactDescriptionWhenIsUppercase() throws Exception {
+        mockMvc.perform(get("/products/search?filter=DESCRIPTION1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].description", Matchers.is(firstProduct.getDescription())));
+    }
+
+    @Test
     void shouldRetrieveNotFoundProductByFilter() throws Exception {
         mockMvc.perform(get("/products/search?filter=dummyBrand")
                 .contentType(MediaType.APPLICATION_JSON))

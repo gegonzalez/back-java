@@ -54,7 +54,7 @@ public class ProductService {
         List<Criteria> orExpression = new ArrayList<>();
         for (String field : fields) {
             Criteria expression = new Criteria();
-            expression.and(field).regex(filter);
+            expression.and(field).regex(filter, "i");
             orExpression.add(expression);
         }
         Query orQuery = new Query();
