@@ -18,6 +18,10 @@ spring:
       username: ${DB_USERNAME}
       password: ${DB_PASSWORD}
       authentication-database: admin
+  jackson:
+    default-property-inclusion: non_null
+  transaction:
+    default-timeout: 200
 
 log4j:
   category:
