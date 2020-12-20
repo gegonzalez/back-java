@@ -9,6 +9,7 @@
 
 .gradle
 build/
+.env
 
 ### STS ###
 .apt_generated
