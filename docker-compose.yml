@@ -1,24 +1,16 @@
 version: '3.1'
 services:
-  test:
+  back-api:
     image: openjdk:11.0-jdk-slim
     working_dir: /api
-    depends_on:
-      - mongodb
+    external_links:
+      - mongodb_local
     environment:
       - GRADLE_OPTS="-Xmx1g"
       - DB_HOST="localhost"
-      - DB_PORT=27018
-      - DB_DATABASE="test"
-      - DB_USERNAME="user"
-      - DB_PASSWORD="secret"
+      - DB_PORT=27017
+      - DB_DATABASE="desafio_walmart"
+      - DB_USERNAME="brandDiscountsUser"
+      - DB_PASSWORD="brandDiscountsPassword"
     command: >
-      make test
-  mongodb:
-    image: mongo:3.6.8
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: user
-      MONGO_INITDB_ROOT_PASSWORD: secret
-      MONGO_INITDB_DATABASE: test
-    ports:
-      - "27018:27017"
+      make run
