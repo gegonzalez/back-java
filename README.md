@@ -1,4 +1,4 @@
-# backend-java# Backend Test
+# Backend Java - Spring boot
 
 ## Tech Stack
 
@@ -20,7 +20,7 @@
     - `DB_DATABASE`
     - `DB_USERNAME`
     - `DB_PASSWORD`
-2. Execute the command `make run`
+2. Execute the command `make build up` and `make database-provision` to load data.
 3. Open the link <http://127.0.0.1:8080/health>
 
 ## Run these commands

@@ -22,7 +22,7 @@ clean:
 	$(g) clean
 
 test:
-	export SPRING_PROFILES_ACTIVE=test && $(g) test
+	docker-compose --file docker-compose-test.yml up -d && export SPRING_PROFILES_ACTIVE=test && $(g) test
 
 ide:
 	$(g) cleanIdea idea
@@ -37,11 +37,11 @@ down:
 logs:
 	$(DOCKER) logs -f
 
-docker-test:
-	$(DOCKER) run --rm test
-
 docker-build:
 	docker build -t back-build .
 
-docker-run:
-	docker run --env-file ./.env -it --rm -p 8080:8080 --link mongodb-local --name api-back back-build
+database-provision:
+	docker exec mongodb-local bash -c './database/import.sh localhost'
+
+database-down:
+	docker rm -f mongodb-local

@@ -1,20 +1,6 @@
 version: '3.1'
 services:
-  test:
-    image: openjdk:11.0-jdk-slim
-    working_dir: /api
-    depends_on:
-      - mongodb
-    environment:
-      - GRADLE_OPTS="-Xmx1g"
-      - DB_HOST="localhost"
-      - DB_PORT=27018
-      - DB_DATABASE="test"
-      - DB_USERNAME="user"
-      - DB_PASSWORD="secret"
-    command: >
-      make test
-  mongodb:
+  mongodb-test:
     image: mongo:3.6.8
     environment:
       MONGO_INITDB_ROOT_USERNAME: user

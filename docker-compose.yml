@@ -1,16 +1,25 @@
-version: '3.1'
+version: '3'
 services:
   back-api:
-    image: openjdk:11.0-jdk-slim
+    container_name: api-back
+    image: app-build-back
     working_dir: /api
-    external_links:
-      - mongodb_local
+    env_file:
+      - ./.env
+    depends_on:
+      - mongodb-local
     environment:
-      - GRADLE_OPTS="-Xmx1g"
-      - DB_HOST="localhost"
-      - DB_PORT=27017
-      - DB_DATABASE="desafio_walmart"
-      - DB_USERNAME="brandDiscountsUser"
-      - DB_PASSWORD="brandDiscountsPassword"
-    command: >
-      make run
+      DB_HOST: mongodb-local
+    ports:
+      - 8080:8080
+  mongodb-local:
+    container_name: mongodb-local
+    image: mongo:3.6.8
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: brandDiscountsUser
+      MONGO_INITDB_ROOT_PASSWORD: brandDiscountsPassword
+      MONGO_INITDB_DATABASE: desafio_walmart
+    ports:
+      - 27017:27017
+    volumes:
+    - ./database:/database
