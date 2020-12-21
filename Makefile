@@ -6,8 +6,8 @@ DOCKER_COMPOSE_FILE = "docker-compose.yml"
 
 DOCKER = docker-compose --file $(DOCKER_COMPOSE_FILE)
 
-build:
-	export SPRING_PROFILES_ACTIVE=test && $(g) build
+build: test
+	$(g) build
 
 run:
 	$(g) bootRun
@@ -21,8 +21,8 @@ stop:
 clean:
 	$(g) clean
 
-test:
-	docker-compose --file docker-compose-test.yml up -d && export SPRING_PROFILES_ACTIVE=test && $(g) test
+test: database-test-up
+	export SPRING_PROFILES_ACTIVE=test && $(g) test
 
 ide:
 	$(g) cleanIdea idea
@@ -41,7 +41,10 @@ docker-build:
 	docker build -t back-build .
 
 database-provision:
-	docker exec mongodb-local bash -c './database/import.sh localhost'
+	docker exec mongodb-gg bash -c './database/import.sh localhost'
+
+database-test-up:
+	docker-compose --file docker-compose-test.yml up -d
 
 database-down:
-	docker rm -f mongodb-local
+	docker rm -f mongodb-gg

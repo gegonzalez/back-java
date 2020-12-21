@@ -1,8 +1,8 @@
-FROM openjdk:11.0-jdk-slim AS build
-COPY . /src
-WORKDIR /src
-RUN ./gradlew build
+FROM openjdk:11.0-jre-slim
 
 EXPOSE 8080
+
+COPY build/libs/*.jar /api/app.jar
+WORKDIR /api
 
 ENTRYPOINT exec java -Duser.timezone=UTC -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} -Djava.security.egd=file:/dev/./urandom -Xmx1024m -jar app.jar
