@@ -25,7 +25,7 @@ public class ProductService {
 
     public ProductResponse find(final int id) {
         var foundProduct = productMongoRepository.findByIdQuery(id);
-        return Optional.ofNullable(foundProduct).map(product -> getProductResponseWithDiscount(product))
+        return Optional.ofNullable(foundProduct).map(this::getProductResponseWithDiscount)
                         .orElse(null);
     }
 
@@ -34,7 +34,7 @@ public class ProductService {
 
         var productList = mongoTemplate.find(orQuery, Product.class);
 
-        return productList.stream().map(product -> getProductResponseWithDiscount(product))
+        return productList.stream().map(this::getProductResponseWithDiscount)
                                     .collect(Collectors.toList());
     }
 
