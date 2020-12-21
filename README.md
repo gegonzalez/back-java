@@ -14,12 +14,12 @@
 
 ## How to install and run
 
-1. Create the file `.env` and set the environment variables:
-    - `DB_HOST`
-    - `DB_PORT`
-    - `DB_DATABASE`
-    - `DB_USERNAME`
-    - `DB_PASSWORD`
+1. Create the file `.env` and set the environment variables. These are suggested values.
+    - `DB_HOST`=localhost
+    - `DB_PORT`=27017
+    - `DB_DATABASE`=database 
+    - `DB_USERNAME`=user
+    - `DB_PASSWORD`=password
 2. Execute the command `make build docker-build up` and `make database-provision` to load data.
 3. Open the link <http://127.0.0.1:8080/health>
 
