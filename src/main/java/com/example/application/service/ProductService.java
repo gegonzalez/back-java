@@ -3,6 +3,7 @@ package com.example.application.service;
 import com.example.application.controller.ProductResponse;
 import com.example.application.controller.transformers.ProductResponseTransformer;
 import com.example.application.domain.Product;
+import com.example.application.repository.ProductMongoRepository;
 import com.example.application.util.PromotionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,18 +21,14 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     private final MongoTemplate mongoTemplate;
+    private final ProductMongoRepository productMongoRepository;
 
     public ProductResponse find(final int id) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(id));
-        var productList =  mongoTemplate.find(query, Product.class);
-        return productList.stream()
-                            .map(product ->
-                                    ProductResponseTransformer.from(product,
-                                                                    PromotionUtil.calculateDiscount(product.getDescription(),
-                                                                                                    product.getPrice())))
-                            .findFirst()
-                            .orElse(null);
+        var foundProduct = productMongoRepository.findByIdQuery(id);
+        return Optional.ofNullable(foundProduct).map(product ->
+                ProductResponseTransformer.from(product, PromotionUtil.calculateDiscount(product.getDescription(),
+                                                                                         product.getPrice())))
+                        .orElse(null);
     }
 
     public List<ProductResponse> find(final String filter) {
