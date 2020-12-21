@@ -1,9 +1,9 @@
 package com.example.application.controller;
 
 import com.example.application.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,16 +23,12 @@ import java.util.Optional;
 @Validated
 @RequestMapping(value = "/products")
 @CrossOrigin(origins = "http://localhost:3000")
+@RequiredArgsConstructor
 public class ProductController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
 
-    @Autowired
     private final ProductService productService;
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping("/search")
     @ResponseBody

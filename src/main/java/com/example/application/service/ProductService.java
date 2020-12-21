@@ -4,7 +4,7 @@ import com.example.application.controller.ProductResponse;
 import com.example.application.controller.transformers.ProductResponseTransformer;
 import com.example.application.domain.Product;
 import com.example.application.util.PromotionUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -15,14 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
-    @Autowired
     private final MongoTemplate mongoTemplate;
-
-    public ProductService(MongoTemplate mongoTemplate) {
-        this.mongoTemplate = mongoTemplate;
-    }
 
     public ProductResponse find(final int id) {
         Query query = new Query();
