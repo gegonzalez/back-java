@@ -2,7 +2,6 @@ package com.example.application.controller;
 
 import com.example.application.domain.Product;
 import com.example.application.repository.ProductMongoRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,11 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class ProductControllerIntegrationTest {
+class ProductControllerIntegrationTest {
     private Product firstProduct;
-    private Product secondProduct;
-    private Product productToSave;
-    private Product productToSave2;
 
     @Autowired
     ProductMongoRepository productMongoRepository;
@@ -32,15 +28,12 @@ public class ProductControllerIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper mapper;
-
     @BeforeEach
     void setUp() {
-        productToSave = new Product(1, "brand", "description1", "image1", 100);
-        productToSave2 = new Product(2, "brazil", "description2", "image2", 200);
+        Product productToSave = new Product(1, "brand", "description1", "image1", 100);
+        Product productToSave2 = new Product(2, "brazil", "description2", "image2", 200);
         firstProduct = productMongoRepository.save(productToSave);
-        secondProduct = productMongoRepository.save(productToSave2);
+        Product secondProduct = productMongoRepository.save(productToSave2);
     }
 
     @AfterEach

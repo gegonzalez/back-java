@@ -22,7 +22,7 @@ clean:
 	$(g) clean
 
 test: database-test-up
-	export SPRING_PROFILES_ACTIVE=test && $(g) test
+	export SPRING_PROFILES_ACTIVE=test && $(g) clean test
 
 ide:
 	$(g) cleanIdea idea
