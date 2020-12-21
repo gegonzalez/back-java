@@ -15,10 +15,12 @@ services:
   mongodb-gg:
     container_name: mongodb-gg
     image: mongo:3.6.8
+    env_file:
+      - ./.env
     environment:
-      MONGO_INITDB_ROOT_USERNAME: brandDiscountsUser
-      MONGO_INITDB_ROOT_PASSWORD: brandDiscountsPassword
-      MONGO_INITDB_DATABASE: desafio_walmart
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${DB_DATABASE}
     ports:
       - 27017:27017
     volumes:
