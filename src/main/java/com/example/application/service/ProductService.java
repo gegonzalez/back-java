@@ -25,9 +25,7 @@ public class ProductService {
 
     public ProductResponse find(final int id) {
         var foundProduct = productMongoRepository.findByIdQuery(id);
-        return Optional.ofNullable(foundProduct).map(product ->
-                ProductResponseTransformer.from(product, PromotionUtil.calculateDiscount(product.getDescription(),
-                                                                                         product.getPrice())))
+        return Optional.ofNullable(foundProduct).map(product -> getProductResponseWithDiscount(product))
                         .orElse(null);
     }
 
@@ -36,11 +34,13 @@ public class ProductService {
 
         var productList = mongoTemplate.find(orQuery, Product.class);
 
-        return productList.stream().map(product ->
-                                    ProductResponseTransformer.from(product,
-                                                                    PromotionUtil.calculateDiscount(product.getDescription(),
-                                                                                                    product.getPrice())))
+        return productList.stream().map(product -> getProductResponseWithDiscount(product))
                                     .collect(Collectors.toList());
+    }
+
+    private ProductResponse getProductResponseWithDiscount(Product product) {
+        return ProductResponseTransformer.from(product, PromotionUtil.calculateDiscount(product.getDescription(),
+                                                                                        product.getPrice()));
     }
 
     private Query buildQueryToFilterByBrandOrDescription(final String filter) {
