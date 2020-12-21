@@ -2,7 +2,7 @@ version: '3'
 services:
   back-api:
     container_name: api-back
-    image: app-build-back
+    image: build-back
     working_dir: /api
     env_file:
       - ./.env
