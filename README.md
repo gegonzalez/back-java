@@ -24,8 +24,9 @@
 3. Open the link <http://127.0.0.1:8080/health>
 
 ## Run these commands
-- **make run**
+- **make up**: executes API and BD services
+- **make down**: stops docker containers
+- **make database-provision**: provision data for the API
 - **make debug**
-- **make stop**
-- **make test**
+- **make test**: executes unit and integration tests with BD for tests
 - **make clean**
