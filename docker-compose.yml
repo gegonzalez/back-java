@@ -7,13 +7,13 @@ services:
     env_file:
       - ./.env
     depends_on:
-      - mongodb-local
+      - mongodb-gg
     environment:
-      DB_HOST: mongodb-local
+      DB_HOST: mongodb-gg
     ports:
       - 8080:8080
-  mongodb-local:
-    container_name: mongodb-local
+  mongodb-gg:
+    container_name: mongodb-gg
     image: mongo:3.6.8
     environment:
       MONGO_INITDB_ROOT_USERNAME: brandDiscountsUser
