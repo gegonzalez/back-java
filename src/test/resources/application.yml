@@ -1,5 +1,4 @@
 spring:
-  profiles: test
   data:
     mongodb:
       host: localhost
