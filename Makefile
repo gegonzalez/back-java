@@ -7,7 +7,7 @@ DOCKER_COMPOSE_FILE = "docker-compose.yml"
 DOCKER = docker-compose --file $(DOCKER_COMPOSE_FILE)
 
 build: test
-	$(g) build
+	$(g) build --no-daemon
 
 run:
 	$(g) bootRun
@@ -22,7 +22,7 @@ clean:
 	$(g) clean
 
 test: database-test-up
-	export SPRING_PROFILES_ACTIVE=test && $(g) clean test
+	. ./env-test  && $(g) clean test
 
 ide:
 	$(g) cleanIdea idea

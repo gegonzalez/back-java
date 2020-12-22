@@ -1,0 +1,3 @@
+set -a
+SPRING_PROFILES_ACTIVE=test
+set +a
