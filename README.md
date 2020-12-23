@@ -23,6 +23,8 @@
 2. Execute the command `make build docker-build up` and `make database-provision` to load data.
 3. Open the link <http://127.0.0.1:8080/health>
 
+Note: If `make build` fails, try `gradle wrapper --gradle-version 6.7.1` and try again.
+
 ## Run these commands
 - **make up**: executes API and BD services
 - **make down**: stops docker containers
